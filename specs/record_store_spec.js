@@ -1,10 +1,15 @@
 var assert = require('assert');
 var RecordStore = require('../record_store');
+var Record = require('../record');
 
 describe('Record Store', function(){
-
+  
+  var recordStore;
+  var recordOne;
+  
   beforeEach(function(){
-    recordStore = new RecordStore('Big Al\'s Music');
+    recordStore = new RecordStore('Big Al\'s Music', 'Glasgow');
+    recordOne = new Record('The Black Keys', 'EL CAMINO', 19.99);
   })
 
   it('should have a Name', function(){
@@ -15,7 +20,13 @@ describe('Record Store', function(){
     assert.equal('Glasgow', recordStore.city)
   });
 
-  it('should have an empty inventory');
-  it('should have one record in it\'s inventory');
+  it('should have an empty inventory', function(){
+    assert.equal(0, recordStore.getInventory());
+  });
+
+  it('should have one record in it\'s inventory', function(){
+    recordStore.addInventory();
+    assert.equal(1, recordStore.getInventory())
+  });
 
 })
