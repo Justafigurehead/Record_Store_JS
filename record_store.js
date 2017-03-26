@@ -44,8 +44,12 @@ RecordStore.prototype = {
       inventoryTotal += record.price;
     })
     return "The shop has a balance of £" + this.balance + " and has an inventory value of £" + inventoryTotal + ".";
-  }
+  }, 
 
+  buyRecord: function(record){
+    this.addInventory(record);
+    this.balance -= record.price;
+  } 
 }
 
 
