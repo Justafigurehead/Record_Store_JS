@@ -1,6 +1,7 @@
 var assert = require('assert');
 var RecordStore = require('../record_store');
 var Record = require('../record');
+// var isEqual = require('lodash.isEqual');
 
 describe('Record Store', function(){
   
@@ -10,6 +11,8 @@ describe('Record Store', function(){
   beforeEach(function(){
     recordStore = new RecordStore('Big Al\'s Music', 'Glasgow');
     recordOne = new Record('The Black Keys', 'EL CAMINO', 19.99);
+    recordTwo = new Record('Lady Gaga', 'The Fame Monster', 19.99);
+    recordThree = new Record('Lady Gaga', 'Born This Way', 19.99);
   })
 
   it('should have a Name', function(){
@@ -33,10 +36,22 @@ describe('Record Store', function(){
     assert.equal(1, recordStore.getInventory());
   });
 
-  it('should create a function that returns all of a Record\'s details as a well-formatted string');
-  it('should create a function that returns all of a records with a well-formatted string');
-  it('should be able to sell a record and adjust the RecordStore so its balance goes up');
+  it('should create a function that returns all of a Record\'s details as a well-formatted string', function(){
+    recordStore.addInventory(recordOne);
+    assert.equal("EL CAMINO by The Black Keys. Priced at 19.99", recordStore.getSingleRecord(recordOne));
+  });
 
+
+  it('should create a function that returns all of a records with a well-formatted string', function(){
+    recordStore.addInventory(recordOne);
+    recordStore.addInventory(recordTwo);
+    assert.deepEqual(["EL CAMINO by The Black Keys. Priced at 19.99", "The Fame Monster by Lady Gaga. Priced at 19.99"], recordStore.getAllRecordInfo());
+  });
+
+  it('should be able to sell a record and adjust the RecordStore so its balance goes up', function(){
+    recordStore.sellRecord(recordOne);
+    assert.equal(19.99, recordStore.balance);
+  });
 
 
 })

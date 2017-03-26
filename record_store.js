@@ -3,14 +3,32 @@ var RecordStore = function(name, city){
   this.city = city;
   this.balance = 0;
   this.inventory = [];
-  this.getInventory = function(){
-    return this.inventory.length;
-  }
-  this.addInventory = function(record){
-    this.inventory.push(record);
-  }
 }
 
+
+RecordStore.prototype = {
+  getInventory: function(){
+    return this.inventory.length;
+  },
+  addInventory: function(record){
+    this.inventory.push(record);
+  }, 
+  getSingleRecord: function(record){
+    return record.title + " by " + record.artist + ". Priced at " + record.price;
+  },
+  getAllRecordInfo: function(){
+    var allinfo = []
+    this.inventory.forEach(function(record){
+      var recordInfo = this.getSingleRecord(record);
+      allinfo.push(recordInfo);
+    }, this)
+    return allinfo;
+  }, 
+  sellRecord: function(record){
+    this.balance += record.price;
+  }
+
+}
 
 
 module.exports = RecordStore;
