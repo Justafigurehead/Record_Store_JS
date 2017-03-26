@@ -12,9 +12,11 @@ describe('Record', function(){
   it('should have an artist name', function(){
     assert.equal('Counting Crows', record.artist);
   });
+  
   it('should have a Title name', function(){
     assert.equal('August and Everything After', record.title);
   });
+
   it('should have a float price', function(){
     assert.equal(19.99, record.price);
   });
