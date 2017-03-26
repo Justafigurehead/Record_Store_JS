@@ -58,7 +58,19 @@ describe('Record Store', function(){
     assert.equal("This item is out of stock.", recordStore.sellRecord(recordOne));
   });
 
-  it('selling record and remove from array of inventory.');
+  it('selling record and remove from array of inventory.', function(){
+    recordStore.addInventory(recordOne);
+    recordStore.sellRecord(recordOne);
+    assert.equal(0, recordStore.getInventory());
+    });
 
+  it('should give a finiancial report of balance and inventory stock balance', function(){
+    recordStore.addInventory(recordOne);
+    recordStore.addInventory(recordTwo);
+    recordStore.addInventory(recordThree);
 
+    recordStore.sellRecord(recordOne);
+    console.log(recordStore.getStoreReport());
+    assert.equal("The shop has a balance of £19.99 and has an inventory value of £39.98.", recordStore.getStoreReport());
+   });
 })
