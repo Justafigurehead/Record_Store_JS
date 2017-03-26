@@ -25,7 +25,11 @@ RecordStore.prototype = {
     return allinfo;
   }, 
   sellRecord: function(record){
+    if (this.inventory.includes(record)){
     this.balance += record.price;
+    } else {
+      return "This item is out of stock.";
+    };
   }
 
 }

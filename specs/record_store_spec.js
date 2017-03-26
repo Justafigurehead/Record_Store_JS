@@ -49,9 +49,16 @@ describe('Record Store', function(){
   });
 
   it('should be able to sell a record and adjust the RecordStore so its balance goes up', function(){
+    recordStore.addInventory(recordOne);
     recordStore.sellRecord(recordOne);
     assert.equal(19.99, recordStore.balance);
   });
+
+  it('should be able to sell a record that is in the inventory only', function(){ 
+    assert.equal("This item is out of stock.", recordStore.sellRecord(recordOne));
+  });
+
+  it('selling record and remove from array of inventory.');
 
 
 })
